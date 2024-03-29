@@ -1,8 +1,8 @@
-"""Chatter Box Lab
+"""empty message
 
-Revision ID: 701a77d2c41a
+Revision ID: 51ce71b36b0d
 Revises: 
-Create Date: 2024-03-28 05:58:27.679021
+Create Date: 2024-03-29 03:46:38.207711
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '701a77d2c41a'
+revision = '51ce71b36b0d'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -22,8 +22,8 @@ def upgrade():
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('body', sa.String(), nullable=True),
     sa.Column('username', sa.String(), nullable=True),
-    sa.Column('created_at', sa.Integer(), server_default=sa.text('(CURRENT_TIMESTAMP)'), nullable=True),
-    sa.Column('updated_at', sa.Integer(), nullable=True),
+    sa.Column('created_at', sa.Date(), server_default=sa.text('(CURRENT_TIMESTAMP)'), nullable=True),
+    sa.Column('updated_at', sa.Date(), nullable=True),
     sa.PrimaryKeyConstraint('id')
     )
     # ### end Alembic commands ###

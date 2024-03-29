@@ -30,7 +30,7 @@ def messages():
         db.session.commit()
         return make_response(new_message.to_dict(),201)
 
-@app.route('/messages/<int:id>', methods=['GET','PATCH','POST','DELETE'])
+@app.route('/messages/<int:id>', methods=['GET','PATCH','DELETE'])
 def messages_by_id(id):
     message = Message.query.filter(Message.id == id).first()
     if request.method == 'GET':
