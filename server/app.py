@@ -32,14 +32,25 @@ def messages():
 
 @app.route('/messages/<int:id>', methods=['GET','PATCH','POST','DELETE'])
 def messages_by_id(id):
-    message = Message.query.get(id)
+    message = Message.query.filter(Message.id == id).first()
     if request.method == 'GET':
         return make_response(message.to_dict(),200)
     elif request.method == 'DELETE':
         db.session.delete(message)
         db.session.commit()
         return make_response({},204)
-  
+    elif request.method =='PATCH':
+        try:
+            incoming = request.json
+            print(incoming)
+            for attr in incoming:
+                setattr(message,attr,incoming[attr])
+                db.session.commit()
+                return make_response(message.to_dict(),202)
+        except:
+                return make_response({"errors": ["validation errors"]},400)
+        else:
+            return make_response({ "error": "Power not found"},404)
     
 if __name__ == '__main__':
     app.run(port=5555, debug=True)
